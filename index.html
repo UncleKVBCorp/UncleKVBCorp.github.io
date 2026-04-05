@@ -127,11 +127,13 @@
 
   /* GALLERY */
   .gallery-bg { background: var(--dark2); }
-  .gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 3rem; }
-  .gallery-item { overflow: hidden; height: 220px; }
-  .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s; display: block; }
+  .gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 3rem; }
+  .gallery-item { overflow: hidden; height: 260px; background: var(--dark3); }
+  .gallery-item img { width: 100%; height: 100%; object-fit: cover; object-position: center top; transition: transform 0.4s; display: block; }
   .gallery-item:hover img { transform: scale(1.05); }
-  .gallery-item.wide { grid-column: span 2; height: 280px; }
+  .gallery-item.wide { grid-column: span 2; height: 320px; }
+  .gallery-item.tall { grid-row: span 2; height: 540px; }
+  .gallery-item.tall img { object-position: center center; }
 
   /* PRICING */
   .pricing-box { background: var(--dark3); border: 1px solid rgba(201,168,76,0.25); padding: 3rem; max-width: 600px; }
@@ -338,19 +340,22 @@
   <h2 class="section-title">Live <span>Workshops</span> & Events</h2>
   <div class="gallery-grid">
     <div class="gallery-item wide">
-      <img src="photo6.jpg" alt="Trading Workshop" onerror="this.parentElement.style.background='#1C2029'">
+      <img src="photo6.jpg" alt="Trading Workshop" onerror="this.parentElement.style.background='#1C2029'" style="object-position: center center;">
+    </div>
+    <div class="gallery-item tall">
+      <img src="photo3.jpg" alt="Uncle K" onerror="this.parentElement.style.background='#1C2029'" style="object-position: center top;">
     </div>
     <div class="gallery-item">
-      <img src="photo3.jpg" alt="Uncle K" onerror="this.parentElement.style.background='#1C2029'">
+      <img src="photo4.jpg" alt="Uncle K" onerror="this.parentElement.style.background='#1C2029'" style="object-position: center top;">
     </div>
     <div class="gallery-item">
-      <img src="photo7.jpg" alt="Workshop Session" onerror="this.parentElement.style.background='#1C2029'">
-    </div>
-    <div class="gallery-item">
-      <img src="photo8.jpg" alt="Workshop Session" onerror="this.parentElement.style.background='#1C2029'">
+      <img src="photo7.jpg" alt="Workshop Session" onerror="this.parentElement.style.background='#1C2029'" style="object-position: center center;">
     </div>
     <div class="gallery-item wide">
-      <img src="photo9.jpg" alt="Trading Session" onerror="this.parentElement.style.background='#1C2029'">
+      <img src="photo9.jpg" alt="Trading Session" onerror="this.parentElement.style.background='#1C2029'" style="object-position: center center;">
+    </div>
+    <div class="gallery-item">
+      <img src="photo1.jpg" alt="Uncle K Lounge" onerror="this.parentElement.style.background='#1C2029'" style="object-position: center top;">
     </div>
   </div>
 </section>
