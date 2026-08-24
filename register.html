@@ -271,23 +271,6 @@
 </footer>
 
 <script>
-// =====================================================
-// GOOGLE FORM SUBMISSION
-// Replace 1FAIpQLSfciDWqaSDxLrR9nPNeXIsV8Fs-NAnXLWO63RI9xZLn1tanuw below after Step 2
-// =====================================================
-const GOOGLE_FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSfciDWqaSDxLrR9nPNeXIsV8Fs-NAnXLWO63RI9xZLn1tanuw/formResponse";
-
-// Google Form field entry IDs - fill after creating form
-const FIELD_IDS = {
-  firstName:  "entry.1913811772",
-  lastName:   "entry.257915679",
-  email:      "entry.194427777",
-  phone:      "entry.977552010",
-  city:       "entry.1840143263",
-  investment: "entry.1791740786",
-  service:    "entry.429702666"
-};
-
 document.getElementById('registerForm').addEventListener('submit', function(e) {
   e.preventDefault();
 
@@ -295,30 +278,52 @@ document.getElementById('registerForm').addEventListener('submit', function(e) {
   btn.textContent = 'Submitting...';
   btn.disabled = true;
 
-  const formData = new FormData();
-  formData.append(FIELD_IDS.firstName,  document.getElementById('firstName').value);
-  formData.append(FIELD_IDS.lastName,   document.getElementById('lastName').value);
-  formData.append(FIELD_IDS.email,      document.getElementById('email').value);
-  formData.append(FIELD_IDS.phone,      document.getElementById('phone').value);
-  formData.append(FIELD_IDS.city,       document.getElementById('city').value);
-  formData.append(FIELD_IDS.investment, document.getElementById('investment').value);
-  formData.append(FIELD_IDS.experience, document.getElementById('experience').value);
-  formData.append(FIELD_IDS.service,    document.getElementById('service').value);
-  formData.append(FIELD_IDS.message,    document.getElementById('message').value);
-
-  // Submit to Google Form
-  fetch(GOOGLE_FORM_URL, {
-    method: 'POST',
-    mode: 'no-cors',
-    body: formData
-  }).then(() => {
-    document.getElementById('formSection').style.display = 'none';
-    document.getElementById('successMsg').style.display = 'block';
-  }).catch(() => {
-    // Show success anyway (no-cors always catches)
-    document.getElementById('formSection').style.display = 'none';
-    document.getElementById('successMsg').style.display = 'block';
+  // Build Google Form URL with data
+  const baseURL = "https://docs.google.com/forms/d/e/1FAIpQLSfciDWqaSDxLrR9nPNeXIsV8Fs-NAnXLWO63RI9xZLn1tanuw/formResponse";
+  
+  const params = new URLSearchParams({
+    "entry.1913811772": document.getElementById('firstName').value,
+    "entry.257915679":  document.getElementById('lastName').value,
+    "entry.194427777":  document.getElementById('email').value,
+    "entry.977552010":  document.getElementById('phone').value,
+    "entry.1840143263": document.getElementById('city').value,
+    "entry.1791740786": document.getElementById('investment').value,
+    "entry.429702666":  document.getElementById('service').value,
   });
+
+  // Use hidden iframe to submit
+  const iframe = document.createElement('iframe');
+  iframe.name = 'hidden_iframe';
+  iframe.style.display = 'none';
+  document.body.appendChild(iframe);
+
+  const form = document.createElement('form');
+  form.method = 'POST';
+  form.action = baseURL;
+  form.target = 'hidden_iframe';
+
+  params.forEach((value, key) => {
+    const input = document.createElement('input');
+    input.type = 'hidden';
+    input.name = key;
+    input.value = value;
+    form.appendChild(input);
+  });
+
+  document.body.appendChild(form);
+  
+  iframe.onload = function() {
+    document.getElementById('formSection').style.display = 'none';
+    document.getElementById('successMsg').style.display = 'block';
+  };
+
+  form.submit();
+
+  // Show success after 2 seconds as backup
+  setTimeout(() => {
+    document.getElementById('formSection').style.display = 'none';
+    document.getElementById('successMsg').style.display = 'block';
+  }, 2000);
 });
 </script>
 
