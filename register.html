@@ -279,16 +279,17 @@ document.getElementById('registerForm').addEventListener('submit', function(e) {
   btn.disabled = true;
 
   // Build Google Form URL with data
-  const baseURL = "https://docs.google.com/forms/d/e/1FAIpQLSfciDWqaSDxLrR9nPNeXIsV8Fs-NAnXLWO63RI9xZLn1tanuw/formResponse";
+  const baseURL = "https://docs.google.com/forms/d/e/1FAIpQLSdV2wqkt-AYC4zKV6plhZb8Wdy8T51imfL3K5Vae-fsDaf6Kw/formResponse";
   
   const params = new URLSearchParams({
-    "entry.1913811772": document.getElementById('firstName').value,
-    "entry.257915679":  document.getElementById('lastName').value,
-    "entry.194427777":  document.getElementById('email').value,
-    "entry.977552010":  document.getElementById('phone').value,
-    "entry.1840143263": document.getElementById('city').value,
-    "entry.1791740786": document.getElementById('investment').value,
-    "entry.429702666":  document.getElementById('service').value,
+    "entry.1192350519": document.getElementById('firstName').value,
+    "entry.612706894":  document.getElementById('lastName').value,
+    "entry.1325258303":  document.getElementById('email').value,
+    "entry.966574814":  document.getElementById('phone').value,
+    "entry.1125966815": document.getElementById('city').value,
+    "entry.1339662986": document.getElementById('investment').value,
+    "entry.269821179":  document.getElementById('experience').value,
+    "entry.1146969042":  document.getElementById('service').value,
   });
 
   // Use hidden iframe to submit
